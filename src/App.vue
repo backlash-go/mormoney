@@ -9,41 +9,18 @@
 </template>
 
 <style lang="scss">
-//@import "~@/assets/styles/test.scss";
+@import "~@/assets/style/reset.scss";
+@import "~@/assets/style/helper.scss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body{
-  line-height: 1.5;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  line-height: 1.5;
+  font-family: $font-hei;
+  color: #333;
+  font-size: 16px;
+
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
