@@ -1,3 +1,6 @@
+/* global $ */
+
+
 module.exports = {
   root: true,
   env: {
