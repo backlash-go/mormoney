@@ -1,30 +1,6 @@
 <template>
-  <Layout>
-    <div class="tags">
-      <ul class="current">
-        <li>衣</li>
-        <li>食</li>
-        <li>住</li>
-        <li>行</li>
-      </ul>
-      <div class="new">
-        <button>新增标签</button>
-      </div>
-    </div>
+  <Layout class-prefix="layout">
 
-    <div>
-      <label class="notes">
-        <span class="name">备注</span>
-        <input type="text" placeholder="在这里输入备注">
-      </label>
-    </div>
-
-    <div>
-      <ul class="types">
-        <li class="selected">支出</li>
-        <li>收入</li>
-      </ul>
-    </div>
 
     <div class="numberPad">
       <div class="output">1000</div>
@@ -46,6 +22,34 @@
       </div>
 
     </div>
+    <div>
+      <ul class="types">
+        <li class="selected">支出</li>
+        <li>收入</li>
+      </ul>
+    </div>
+    <div>
+      <label class="notes">
+        <span class="name">备注</span>
+        <input type="text" placeholder="在这里输入备注">
+      </label>
+    </div>
+
+    <div class="tags">
+      <div class="new">
+        <button>新增标签</button>
+      </div>
+      <ul class="current">
+        <li>衣</li>
+        <li>食</li>
+        <li>住</li>
+        <li>行</li>
+      </ul>
+    </div>
+
+
+
+
   </Layout>
 </template>
 
@@ -55,15 +59,33 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.layout-content{
+  border: 2px solid burlywood;
+  display: flex;
+  flex-direction: column-reverse;
+}
+</style>
+
+
+
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
 .tags {
   font-size: 14px;
   padding: 16px;
+  flex-grow: 1;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column-reverse;
+
 
   > .current {
     display: flex;
+    flex-wrap: wrap;
+
+
 
     > li {
       display: flex;
