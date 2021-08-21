@@ -19,7 +19,7 @@ export default class Types extends Vue {
   @Prop({
     type: Number,
     default: 100
-  }) xxx: number;
+  })
   //Prop 告诉vue xxx  不是data  是prop
   //number | undefined 告诉 ts 编译时的类型
   //Number 告诉vue 运行时是个Number
