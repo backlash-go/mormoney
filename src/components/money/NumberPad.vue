@@ -32,7 +32,7 @@ export default class Types extends Vue {
 
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
-    const input  = button.textContent as string;
+    const input = button.textContent as string;
     if (this.output.length === 16) {return;}
 
     if (this.output === '0') {
@@ -59,9 +59,12 @@ export default class Types extends Vue {
 
   }
 
+
   ok() {
-    console.log("ok is todo ")
+    this.$emit('update:value', this.output);
+    this.$emit('submit',this.output)
   }
+
 }
 </script>
 
