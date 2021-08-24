@@ -5,7 +5,7 @@
     <Types :value.sync="record.type"/>
     <Notes @update:value="onUpdateNotes"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
-
+{{recordList}}
   </Layout>
 </template>
 
@@ -23,7 +23,8 @@ type Record = {
   tags: string[],
   type: string,
   amount: number,
-  notes: string
+  notes: string,
+  createdAt: Date
 }
 
 @Component({
@@ -34,12 +35,13 @@ export default class Money extends Vue {
   tags = ['衣', '食', '住', '行', '娱'];
 
   //初始化record
-  recordList: Record[] = [];
+  recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
   record: Record = {tags: [], type: '-', amount: 0, notes: ''};
 
 
   saveRecord() {
-    const record2 = JSON.parse(JSON.stringify(this.record));
+    const record2: Record = JSON.parse(JSON.stringify(this.record));
+    record2.createdAt = new Date();
     this.recordList.push(record2);
     console.log(this.recordList);
   }
