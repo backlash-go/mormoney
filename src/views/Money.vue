@@ -16,34 +16,35 @@ import Types from '@/components/money/Types.vue';
 import Notes from '@/components/money/Notes.vue';
 import Tags from '@/components/money/Tags.vue';
 import {Component, Watch} from 'vue-property-decorator';
-import {model} from '@/model';
+import {recordListModel} from '@/models/recordListModel';
+import {tagListModel} from '@/models/tagListModel';
 
 
-// const model = require('@/model.ts').model;
-// const {model} = require('@/model.js')
+// const recordListModel = require('@/recordListModel.ts').recordListModel;
+// const {recordListModel} = require('@/recordListModel.js')
 
-
+tagListModel.fetch();
 @Component({
   components: {Tags, Notes, Types, NumberPad}
 })
 
 export default class Money extends Vue {
-  tags = ['衣', '食', '住', '行', '娱'];
+  tags = tagListModel.data;
 
   //初始化record
-  recordList = model.fetch();
+  recordList = recordListModel.fetch();
   record: RecordItem = {tags: [], type: '-', amount: 0, notes: ''};
 
 
   saveRecord() {
-    const record2 = model.clone(this.record);
+    const record2 = recordListModel.clone(this.record);
     record2.createdAt = new Date();
     this.recordList.push(record2);
   }
 
   @Watch('recordList')
   onRecordChange() {
-    model.save(this.recordList);
+    recordListModel.save(this.recordList);
   }
 
   onUpdateTags(value: string[]) {

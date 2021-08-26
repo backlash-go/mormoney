@@ -7,7 +7,7 @@
   </div>
 
   <!--
-  代码有 :value =value @input="value = $event.target.value" == v-model
+  代码有 :value =value @input="value = $event.target.value" == v-recordListModel
   -->
 
 </template>
