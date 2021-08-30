@@ -29,7 +29,8 @@ tagListModel.fetch();
 })
 
 export default class Money extends Vue {
-  tags = tagListModel.data;
+
+  tags = tagListModel.data.map(item => item.name);
 
   //初始化record
   recordList = recordListModel.fetch();
