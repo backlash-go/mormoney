@@ -8,10 +8,10 @@
       </router-link>
 
     </div>
-
-    <div class="createTag-wrapper">
-      <button class="createTag" @click="createTag">新建标签</button>
+    <div class="button-wrapper">
+      <new-button class="createTag" @click.native="createTag">新建标签</new-button>
     </div>
+
   </Layout>
 </template>
 
@@ -19,12 +19,15 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {tagListModel} from '@/models/tagListModel';
+import NewButton from '@/components/newButton.vue';
 
 
-@Component
+@Component({
+      components: {NewButton}
+    }
+)
 export default class Labels extends Vue {
   tags = tagListModel.fetch();
-
 
   createTag() {
     const name = window.prompt('请输入标签名');
@@ -55,20 +58,28 @@ export default class Labels extends Vue {
     margin-right: 16px;
   }
 
+
+
+
+  //.createTag {
+  //  background: #767676;
+  //  color: white;
+  //  border-radius: 4px;
+  //  border: none;
+  //  height: 40px;
+  //  padding: 0 16px;
+  //
+  //  &-wrapper {
+  //    text-align: center;
+  //    margin-top: 44px;
+  //  }
+  //}
 }
 
-.createTag {
-  background: #767676;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  height: 40px;
-  padding: 0 16px;
-
-  &-wrapper {
-    text-align: center;
-    margin-top: 44px;
-  }
+.button-wrapper{
+  text-align: center;
+  margin-top: 44px;
 }
+
 
 </style>
