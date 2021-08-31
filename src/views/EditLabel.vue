@@ -1,15 +1,15 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="left"/>
+      <Icon class="leftIcon" name="left" @click.native="goBack"/>
       <span class="title">编辑标签</span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem field-name="标签名" placeholder="请输入标签名"/>
+      <FormItem :value="this.tag.name" @update:value="upDateTag" field-name="标签名" placeholder="请输入标签名"/>
     </div>
     <div class="button-wrapper">
-      <new-button>删除标签</new-button>
+      <new-button @click.native="remove">删除标签</new-button>
     </div>
   </Layout>
 </template>
@@ -20,22 +20,42 @@ import {Component} from 'vue-property-decorator';
 import {tagListModel} from '@/models/tagListModel';
 import FormItem from '@/components/money/FormItem.vue';
 import NewButton from '@/components/newButton.vue';
+import Tags from '@/components/money/Tags.vue';
 
 @Component({
   components: {NewButton, FormItem}
 })
 export default class EditLabel extends Vue {
+
+  tag?: { id: string, name: string } = undefined;
+
   created() {
     const id = this.$route.params.id;
     const tags = tagListModel.fetch();
     const tag = tags.filter((t => t.id === id))[0];
     if (tag) {
-      console.log(tag);
+      this.tag = tag;
     } else {
       this.$router.replace('/404');
     }
     // const tag = tags.filter(t => t.id === id)[0];
     // console.log(tags);
+  }
+
+  upDateTag(name: string) {
+    if (this.tag.id) {
+      tagListModel.update(this.tag.id, name);
+    }
+  }
+
+  remove() {
+    if (this.tag) {
+      tagListModel.remove(this.tag.id);
+    }
+  }
+
+  goBack() {
+    this.$router.back();
   }
 }
 </script>
