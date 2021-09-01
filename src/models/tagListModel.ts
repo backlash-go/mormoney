@@ -1,3 +1,5 @@
+import createId from '@/lib/createId';
+
 const localStorageKeyName = 'tagList';
 
 
@@ -34,13 +36,14 @@ const tagListModel: TagListModel = {
       alert('已经存在');
       return '';
     }
-    this.data.push({id: name, name: name});
+    const id = createId().toString();
+    this.data.push({id: id, name: name});
     this.save();
     return name;
   },
   update(id: string, name: string) {
     if (name === '') {
-      return 'notFound'
+      return 'notFound';
     }
     const idList = this.data.map((item) => item.id);
     if (idList.indexOf(id) >= 0) {
@@ -49,7 +52,7 @@ const tagListModel: TagListModel = {
         return 'duplicated';
       } else {
         const tag = this.data.filter((item) => item.id === id)[0];
-        tag.id = tag.name = name;
+        tag.name = name;
         this.save();
         return 'success';
       }
