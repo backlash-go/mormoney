@@ -27,12 +27,12 @@ import NewButton from '@/components/newButton.vue';
     }
 )
 export default class Labels extends Vue {
-  tags = tagListModel.fetch();
+  tags = window.tagList;
 
   createTag() {
     const name = window.prompt('请输入标签名');
     if (name) {
-      tagListModel.create(name);
+      window.createTag(name);
     }
   }
 }
@@ -59,8 +59,6 @@ export default class Labels extends Vue {
   }
 
 
-
-
   //.createTag {
   //  background: #767676;
   //  color: white;
@@ -76,7 +74,7 @@ export default class Labels extends Vue {
   //}
 }
 
-.button-wrapper{
+.button-wrapper {
   text-align: center;
   margin-top: 44px;
 }

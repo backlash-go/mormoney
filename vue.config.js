@@ -14,6 +14,6 @@ module.exports = {
       .tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]})).end();
     //解决SVG fill问题
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}]);
-    config.module.rule('svg').exclude.add(dir); //其他的 svg loader 排除icons目录
+    config.module.rule('svg').exclude.add(dir); //其他的 svg  loader 排除icons目录
   }
 };

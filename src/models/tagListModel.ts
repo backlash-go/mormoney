@@ -3,21 +3,7 @@ import createId from '@/lib/createId';
 const localStorageKeyName = 'tagList';
 
 
-type Tag = {
-  id: string,
-  name: string
-}
 
-type TagListModel = {
-  data: Tag[],
-  save: () => void,
-  create: (name: string) => string,
-  fetch: () => Tag[],
-  update: (id: string, name: string) => 'success' | 'notFound' | 'duplicated',
-  remove: (id: string) => boolean
-
-
-}
 
 const tagListModel: TagListModel = {
   data: [],
@@ -26,10 +12,7 @@ const tagListModel: TagListModel = {
     return this.data;
 
   },
-  save() {
-    window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
 
-  },
   create(name: string) {
     const names = this.data.map((item) => item.name);
     if (names.indexOf(name) >= 0) {
@@ -67,7 +50,11 @@ const tagListModel: TagListModel = {
     this.save();
     return true;
 
-  }
+  },
+  save() {
+    window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
+
+  },
 
 };
 
