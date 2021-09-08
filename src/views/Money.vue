@@ -35,18 +35,18 @@ export default class Money extends Vue {
   tags = window.tagList.map((item => item.name));
 
   //初始化record
-  recordList = recordListModel.fetch();
+  recordList = window.recordList;
   record: RecordItem = {tags: [], type: '-', amount: 0, notes: ''};
 
 
   saveRecord() {
-    recordListModel.create(this.record);
+    window.createRecord(this.record);
   }
 
-  @Watch('recordList')
-  onRecordChange() {
-    recordListModel.save();
-  }
+  // @Watch('recordList')
+  // onRecordChange() {
+  //   recordListModel.save();
+  // }
 
   onUpdateTags(value: string[]) {
     this.record.tags = value;
