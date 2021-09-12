@@ -7,7 +7,7 @@
       <FormItem field-name="备注" placeholder="请在这里输入备注" @update:value="onUpdateNotes"/>
 
     </div>
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags/>
   </Layout>
 </template>
 
@@ -27,7 +27,12 @@ import {tagListModel} from '@/models/tagListModel';
 // const {recordListModel} = require('@/recordListModel.js')
 
 @Component({
-  components: {Tags, FormItem, Types, NumberPad}
+  components: {Tags, FormItem, Types, NumberPad},
+  computed: {
+    recordList() {
+      return this.$store.state.recordList;
+    }
+  }
 })
 
 export default class Money extends Vue {
@@ -35,12 +40,15 @@ export default class Money extends Vue {
   tags = window.tagList.map((item => item.name));
 
   //初始化record
-  recordList = window.recordList;
+  // recordList = window.recordList;
   record: RecordItem = {tags: [], type: '-', amount: 0, notes: ''};
 
+  created() {
+    this.$store.commit('fetch');
+  }
 
   saveRecord() {
-    window.createRecord(this.record);
+    this.$store.commit('createRecord', this.record);
   }
 
   // @Watch('recordList')
