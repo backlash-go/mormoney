@@ -1,12 +1,12 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="create">新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="(item ,index) in tags" :key="index"
-          :class="{selected: selectedTags.indexOf(tags[index]) >=0}"
-          @click="toggle(tags[index])"> {{ item.name }}
+      <li v-for="(item ,index) in tagsList" :key="index"
+          :class="{selected: selectedTags.indexOf(tagsList[index]) >=0}"
+          @click="toggle(tagsList[index])"> {{ item.name }}
         <!--          :class="selectedTags.indexOf(dataSource[index]) >=0 && 'selected'"-->
 
       </li>
@@ -20,12 +20,29 @@
 
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import createId from '@/lib/createId';
+import {mixins} from 'vue-class-component';
+import TagHelper from '@/mixins/tagHelper';
 
-@Component
+@Component({
+      computed: {
+        tagsList() {
+          return this.$store.state.tagsList;
+        }
+      }
+    }
+)
 
-export default class Tags extends Vue {
+export default class Tags extends mixins(TagHelper) {
   selectedTags: string[] = [];
-  tags: Tag[] = window.tagList;
+
+
+  // tagsList: Tag[] = window.tagList;
+
+  created() {
+    this.$store.commit('fetchTagList');
+
+  }
 
   toggle(tag: string) {
 
@@ -38,17 +55,15 @@ export default class Tags extends Vue {
     this.$emit('update:value', this.selectedTags);
   }
 
-  create() {
-    const name = window.prompt('请输入标签名');
-    if (!name) {
-      window.alert('标签名不能为空');
-    } else {
-
-      window.createTag(name);
-
-
-    }
-  }
+  // create() {
+  //   const name = window.prompt('请输入标签名');
+  //   if (!name) {
+  //     window.alert('标签名不能为空');
+  //   } else {
+  //
+  //     this.$store.commit('createTag', name);
+  //   }
+  // }
 }
 
 

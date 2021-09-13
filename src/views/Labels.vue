@@ -20,21 +20,31 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {tagListModel} from '@/models/tagListModel';
 import NewButton from '@/components/newButton.vue';
+import TagHelper from '@/mixins/tagHelper';
+import {mixins} from 'vue-class-component';
 
 
 @Component({
-      components: {NewButton}
+      components: {NewButton},
+
+      computed: {
+        tags() {
+          return this.$store.state.tagsList;
+        }
+      }
     }
 )
-export default class Labels extends Vue {
-  tags = window.tagList;
-
-  createTag() {
-    const name = window.prompt('请输入标签名');
-    if (name) {
-      window.createTag(name);
-    }
+export default class Labels extends mixins(TagHelper) {
+  created() {
+    this.$store.commit('fetchTagList');
   }
+
+  // createTag() {
+  //   const name = window.prompt('请输入标签名');
+  //   if (name) {
+  //     this.$store.commit('createTag', name);
+  //   }
+  // }
 }
 </script>
 
