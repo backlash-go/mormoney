@@ -8,6 +8,7 @@
 import Types from '@/components/money/Types.vue';
 import Component from 'vue-class-component';
 import Vue from 'vue';
+import dayjs from 'dayjs';
 
 @Component({
   components: {Types}
@@ -16,12 +17,20 @@ import Vue from 'vue';
 export default class Statistics extends Vue {
   yyy = '-';
 
+  created() {
+    const now = new dayjs();
+
+    console.log(now);
+  }
+
 }
+
+
 </script>
 
 <style lang="scss" scoped>
 
- ::v-deep li {
+::v-deep .zzz-item {
   background: white;
 
   &.selected {
